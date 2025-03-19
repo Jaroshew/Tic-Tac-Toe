@@ -1,0 +1,360 @@
+:root {
+    --color-backdrop: hsla(17, 16%, 92%, 0.8);
+    --color-form: hsla(0, 0%, 93%);
+    --color-secondary: hsla(10, 98%, 51%, 0.85);
+    --text-primary: hsla(172, 95%, 18%, 1);
+    --border-primary: rgb(234, 234, 234);
+    --color-complementary: #f33411;
+    --shadow-outer: 8px 8px 16px rgba(0,0,0,0.15), -8px -8px 16px #ffffff;
+    --shadow-inner: inset 6px 6px 12px #bcbcbc, inset -6px -6px 12px #ffffff;
+    --border-radius: 16px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "PT Serif", serif;
+    font-weight: 400;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    background-image: 
+        linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+        linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+        linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Base font size for body, inputs and buttons */
+body, input, button {
+    font-size: 1.25rem;
+    color: #333;
+}
+
+/* Container styling for the main section */
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 650px;
+    width: 90%;
+    padding: 40px 30px;
+    margin: 20px;
+    background: var(--color-form);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-outer);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+/* Style for text inputs and select elements */
+input[type="text"], select {
+    margin: 1.8rem 0;
+    width: 320px;
+    max-width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background-color: #e0e0e0;
+    border: none;
+    box-shadow: var(--shadow-inner);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    box-shadow: inset 3px 3px 8px #bcbcbc, inset -3px -3px 8px #ffffff;
+    background-color: #e8e8e8;
+}
+
+/* Specific styling for the game mode select */
+#gameMode {
+    border-radius: 10px;
+    border: 2px solid rgba(0,0,0,0.1);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* Labels */
+label {
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+    text-shadow: 1px 1px 1px #fff;
+}
+
+.player-name {
+    margin: 10px 0 20px;
+}
+
+/* Button styling */
+button {
+    color: #090909;
+    padding: 0.9em 2em;
+    font-size: 18px;
+    border-radius: 12px;
+    background: #e8e8e8;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s;
+    box-shadow: var(--shadow-outer);
+    border: 0.2px solid var(--border-primary);
+    margin: 10px auto;
+    min-width: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.6), transparent);
+    border-radius: 12px 12px 0 0;
+}
+
+button:active {
+    color: #666;
+    box-shadow: inset 5px 5px 10px #c5c5c5, inset -5px -5px 10px #ffffff;
+}
+
+button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.button-press {
+  transform: scale(0.99);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.button-press {
+  animation: button-release 0.1s ease-out;
+}
+
+/* Board styling */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-gap: 15px;
+    justify-content: center;
+    margin: 30px auto;
+    padding: 20px;
+    background: #e0e0e0;
+    border-radius: var(--border-radius);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.5);
+}
+
+/* Styling individual cells */
+.cell {
+    width: 120px;
+    height: 120px;
+    background-color: #e0e0e0;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    box-shadow: var(--shadow-inner);
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    position: relative;
+}
+
+.cell:hover {
+    background-color: #e8e8e8;
+    box-shadow: inset 4px 4px 6px #bcbcbc, inset -4px -4px 6px #ffffff;
+}
+
+.cell.taken {
+    pointer-events: none;
+}
+
+/* Color indication for occupied cells */
+.cell.occupied-x {
+    background-color: #ff5555;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: inset 4px 4px 10px #cc4444, inset -4px -4px 10px #ff7777;
+}
+
+.cell.occupied-o {
+    background-color: #60c360;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    box-shadow: inset 4px 4px 10px #4ba24b, inset -4px -4px 10px #75dc75;
+}
+
+/* Styling for reset buttons */
+#resetBtn, #playAgainBtn, #fullResetBtn {
+    display: inline-block;
+    font-size: 1rem;
+    margin: 15px auto;
+    padding: 12px 24px;
+    background: linear-gradient(145deg, #f0f0f0, #e6e6e6);
+}
+
+/* Header and additional text styling with depth */
+h1, h2, h3 {
+    margin: 15px 0;
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, var(--text-primary), rgba(22, 133, 111, 0.8));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin: 16px 0;
+}
+
+h3 {
+    font-size: 1.4rem;
+    color: var(--color-secondary);
+    margin-bottom: 25px;
+}
+
+/* Score board */
+#scoreBoard {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background: #e0e0e0;
+    box-shadow: inset 3px 3px 7px rgba(0,0,0,0.05), inset -3px -3px 7px rgba(255,255,255,0.7);
+}
+
+#scoreX, #scoreO {
+    font-size: 1.3rem;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.1), -4px -4px 8px #ffffff;
+    min-width: 120px;
+}
+
+/* Turn indicator */
+#turnIndicator {
+    position: relative;
+    padding: 15px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    box-shadow: var(--shadow-inner);
+    margin: 20px auto;
+    max-width: 80%;
+    font-weight: 500;
+}
+
+/* Winner cell animation */
+.cell.winner {
+    animation: winPulse 0.6s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7), inset 4px 4px 10px rgba(0,0,0,0.2), inset -4px -4px 10px rgba(255,255,255,0.3);
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .board {
+        grid-template-columns: repeat(3, 100px);
+        grid-gap: 10px;
+    }
+    
+    .cell {
+        width: 100px;
+        height: 100px;
+        font-size: 2.2em;
+    }
+    
+    h1 {
+        font-size: 2.4rem;
+    }
+    
+    input[type="text"], select {
+        width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .board {
+        grid-template-columns: repeat(3, 80px);
+        grid-gap: 8px;
+    }
+    
+    .cell {
+        width: 80px;
+        height: 80px;
+        font-size: 1.8em;
+    }
+    
+    .container {
+        padding: 25px 15px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    input[type="text"], select {
+        width: 100%;
+    }
+}
+
+/* Animation for winner cells */
+@keyframes winPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Transitions for sections */
+.container {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.container.hidden {
+    transform: translateY(20px);
+    opacity: 0;
+}
