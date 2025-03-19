@@ -20,4 +20,4 @@ This is a simple yet interactive Tic-Tac-Toe game built using JavaScript. The ga
 - JavaScript
 
 ## 🔗 Live Demo  
-Play the game here: [Tic-Tac-Toe](https://jaroshew.github.io/Tic-tac-toe/)
+Play the game here: [Tic-Tac-Toe](https://jaroshew.github.io/Tic-Tac-Toe/)
